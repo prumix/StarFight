@@ -3,6 +3,7 @@ package com.mygdx.gameru.prumix.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Matrix3;
@@ -15,6 +16,7 @@ import com.mygdx.gameru.prumix.math.Rect;
 public class BaseScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
+    private final Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 
     private Rect screenBounds;
     private Rect worldBounds;
@@ -28,6 +30,8 @@ public class BaseScreen implements Screen, InputProcessor {
     @Override
     public void show() {
         System.out.println("show");
+        music.setLooping(true);
+        music.play();
         Gdx.input.setInputProcessor(this);
         batch = new SpriteBatch();
         screenBounds = new Rect();
