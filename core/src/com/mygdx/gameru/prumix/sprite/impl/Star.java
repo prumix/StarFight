@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.gameru.prumix.math.Rect;
 import com.mygdx.gameru.prumix.sprite.Sprite;
 
+
 public class Star extends Sprite {
 
     private Rect worldBounds;
@@ -33,14 +34,14 @@ public class Star extends Sprite {
         checkBounds();
     }
 
-    private void checkBounds(){
-        if(getRight() < worldBounds.getLeft()){
+    private void checkBounds() {
+        if (getRight() < worldBounds.getLeft()) {
             setLeft(worldBounds.getRight());
         }
-        if (getLeft() > worldBounds.getRight()){
+        if (getLeft() > worldBounds.getRight()) {
             setRight(worldBounds.getLeft());
         }
-        if (getTop() < worldBounds.getBottom()){
+        if (getTop() < worldBounds.getBottom()) {
             setBottom(worldBounds.getTop());
         }
     }

@@ -6,7 +6,6 @@ import com.mygdx.gameru.prumix.math.Rect;
 import com.mygdx.gameru.prumix.sprite.Sprite;
 
 
-
 public class Background extends Sprite {
 
     public Background(Texture texture) {

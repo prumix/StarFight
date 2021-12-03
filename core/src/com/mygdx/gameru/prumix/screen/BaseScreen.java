@@ -16,10 +16,9 @@ import com.mygdx.gameru.prumix.math.Rect;
 public class BaseScreen implements Screen, InputProcessor {
 
     protected SpriteBatch batch;
-    private final Music music = Gdx.audio.newMusic(Gdx.files.internal("sounds/music.mp3"));
 
     private Rect screenBounds;
-    private Rect worldBounds;
+    protected Rect worldBounds;
     private Rect glBounds;
 
     private Matrix4 worldToGl;
@@ -30,8 +29,6 @@ public class BaseScreen implements Screen, InputProcessor {
     @Override
     public void show() {
         System.out.println("show");
-        music.setLooping(true);
-        music.play();
         Gdx.input.setInputProcessor(this);
         batch = new SpriteBatch();
         screenBounds = new Rect();
