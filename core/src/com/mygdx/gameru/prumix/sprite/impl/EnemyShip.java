@@ -21,6 +21,9 @@ public class EnemyShip extends Ship {
     @Override
     public void update(float delta) {
         super.update(delta);
+        if (getTop() > worldBounds.getTop()) {
+            reloadTimer = 0.8f * reloadInterval;
+        }
         if (getBottom() < worldBounds.getBottom()) {
             destroy();
         }
