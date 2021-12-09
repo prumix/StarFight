@@ -3,7 +3,6 @@ package com.mygdx.gameru.prumix.util;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class Regions {
-
     /**
      * Разбивает TextureRegion на фреймы
      * @param region регион

@@ -8,6 +8,7 @@ import com.mygdx.gameru.prumix.util.Regions;
 
 
 public class Sprite extends Rect {
+
     protected float angle;
     protected float scale = 1f;
     protected TextureRegion[] regions;
