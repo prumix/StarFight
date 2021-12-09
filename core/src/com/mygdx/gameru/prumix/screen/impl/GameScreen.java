@@ -16,6 +16,7 @@ import com.mygdx.gameru.prumix.sprite.impl.Bullet;
 import com.mygdx.gameru.prumix.sprite.impl.EnemyShip;
 import com.mygdx.gameru.prumix.sprite.impl.GameOver;
 import com.mygdx.gameru.prumix.sprite.impl.MainShip;
+import com.mygdx.gameru.prumix.sprite.impl.NewGameButton;
 import com.mygdx.gameru.prumix.sprite.impl.Star;
 import com.mygdx.gameru.prumix.util.EnemyEmitter;
 
@@ -29,6 +30,7 @@ public class GameScreen extends BaseScreen {
     private Texture bg;
     private Background background;
     private GameOver gameOver;
+    private NewGameButton newGameButton;
 
     private ExplosionPool explosionPool;
     private BulletPool bulletPool;
@@ -56,6 +58,7 @@ public class GameScreen extends BaseScreen {
         explosionSound = Gdx.audio.newSound(Gdx.files.internal("sounds/explosion.wav"));
 
         gameOver = new GameOver(atlas);
+        newGameButton = new NewGameButton(atlas, this);
 
         explosionPool = new ExplosionPool(atlas, explosionSound);
         bulletPool = new BulletPool();
@@ -92,6 +95,7 @@ public class GameScreen extends BaseScreen {
         }
         mainShip.resize(worldBounds);
         gameOver.resize(worldBounds);
+        newGameButton.resize(worldBounds);
     }
 
     @Override
@@ -110,25 +114,39 @@ public class GameScreen extends BaseScreen {
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
-        mainShip.touchDown(touch, pointer, button);
+        if (!mainShip.isDestroyed()){
+            mainShip.touchDown(touch, pointer, button);
+        }
+        else {
+            newGameButton.touchDown(touch, pointer, button);
+        }
         return false;
     }
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
-        mainShip.touchUp(touch, pointer, button);
+        if (!mainShip.isDestroyed()){
+            mainShip.touchUp(touch, pointer, button);
+        }
+        else {
+            newGameButton.touchUp(touch, pointer, button);
+        }
         return false;
     }
 
     @Override
     public boolean keyDown(int keycode) {
-        mainShip.keyDown(keycode);
+        if (!mainShip.isDestroyed()) {
+            mainShip.keyDown(keycode);
+        }
         return false;
     }
 
     @Override
     public boolean keyUp(int keycode) {
-        mainShip.keyUp(keycode);
+        if (!mainShip.isDestroyed()) {
+            mainShip.keyUp(keycode);
+        }
         return false;
     }
 
@@ -202,8 +220,16 @@ public class GameScreen extends BaseScreen {
             enemyPool.drawActiveSprites(batch);
         } else {
             gameOver.draw(batch);
+            newGameButton.draw(batch);
         }
         explosionPool.drawActiveSprites(batch);
         batch.end();
+    }
+
+    public void startNewGame() {
+        mainShip.startNewGame();
+        bulletPool.freeAllDestroyed();
+        enemyPool.freeAllDestroyed();
+        explosionPool.freeAllDestroyed();
     }
 }
